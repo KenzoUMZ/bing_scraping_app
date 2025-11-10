@@ -96,12 +96,20 @@ class UiTextStyle {
     Color? backgroundColor,
     FontWeight fontWeight = FontWeight.w400,
     double letterSpacing = 0,
+    TextDecoration? decoration,
+    Color? decorationColor,
+    double? decorationThickness,
+    TextDecorationStyle? decorationStyle,
   }) => GoogleFonts.publicSans(
     fontSize: 16,
     fontWeight: fontWeight,
     color: color ?? UiColors.textStrong,
     backgroundColor: backgroundColor,
     letterSpacing: letterSpacing,
+    decoration: decoration,
+    decorationColor: decorationColor,
+    decorationThickness: decorationThickness,
+    decorationStyle: decorationStyle,
   );
 
   /// [fontSize: 14, FontWeight.w500, PrimitiveColors.grey800, letterSpacing: 0]

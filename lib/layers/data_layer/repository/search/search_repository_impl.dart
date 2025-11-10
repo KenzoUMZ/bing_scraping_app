@@ -12,7 +12,7 @@ class SearchRepositoryImpl extends ISearchRepository {
     required String searchTerm,
   }) {
     return ApiResponseHandler.validateResponse<SearchResponseEntity>(
-      () async => _dataSource.fetchSearchResults(searchTerm ?? ''),
+      () async => _dataSource.fetchSearchResults(searchTerm),
       (data) => SearchResponseEntity.fromJson(data),
     );
   }

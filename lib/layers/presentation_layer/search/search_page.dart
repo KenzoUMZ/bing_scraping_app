@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gap/flutter_gap.dart';
 
 import '../../../core/components/buttons/ui_button.dart';
@@ -33,39 +34,54 @@ class _SearchPageState extends State<SearchPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          ImageController('assets/images/google_logo_large.svg', width: 240),
-          const Gap(32),
-          UiTextFormField(
-            prefixIcon: ImageController(
-              'assets/images/google_logo_small.png',
-            ).addMargin(const EdgeInsets.all(6)),
-            controller: _searchTextController,
-            placeholder: 'Search',
-            withShadow: true,
-          ),
-          const Gap(24),
-          UiButton(
-            label: 'Search',
-            suffixIcon: Icon(
-              Icons.search,
-              color: isButtonDisabled ? UiColors.iconLight : UiColors.textMuted,
-            ).addMargin(const EdgeInsets.only(left: 8)),
-            width: 0.5 * MediaQuery.sizeOf(context).width,
-            labelColor:
-                isButtonDisabled ? UiColors.textMuted : UiColors.textStrong,
-            backgroundColor: UiColors.bgWhite,
-            borderColor: UiColors.strokeMuted,
-            isDisabled: isButtonDisabled,
-            onPressed: () {
-              final query = _searchTextController.text.trim();
-              _controller.search(searchTerm: query);
-            },
-          ),
-        ],
-      ).addPadding(const EdgeInsets.symmetric(horizontal: 16)),
+      body: BlocBuilder<SearchInternetController, SearchInternetState>(
+        bloc: _controller,
+        builder: (_, state) {
+          return Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              ImageController(
+                'assets/images/google_logo_large.svg',
+                width: 240,
+              ),
+              const Gap(32),
+              UiTextFormField(
+                prefixIcon: ImageController(
+                  'assets/images/google_logo_small.png',
+                ).addMargin(const EdgeInsets.all(6)),
+                controller: _searchTextController,
+                placeholder: 'Search',
+                withShadow: true,
+              ),
+              const Gap(24),
+              UiButton(
+                label: 'Search',
+                suffixIcon: Icon(
+                  Icons.search,
+                  color:
+                      isButtonDisabled
+                          ? UiColors.iconLight
+                          : UiColors.textMuted,
+                ).addMargin(const EdgeInsets.only(left: 8)),
+                width: 0.5 * MediaQuery.sizeOf(context).width,
+                labelColor:
+                    isButtonDisabled ? UiColors.textMuted : UiColors.textStrong,
+                backgroundColor: UiColors.bgWhite,
+                borderColor: UiColors.strokeMuted,
+                isDisabled: isButtonDisabled,
+                onPressed: () async {
+                  final query = _searchTextController.text.trim();
+                  await _controller.search(searchTerm: query);
+                  NavigatorSingleton.I.pushNamed(
+                    '/results',
+                    arguments: state.searchResponse,
+                  );
+                },
+              ),
+            ],
+          ).addPadding(const EdgeInsets.symmetric(horizontal: 16));
+        },
+      ),
     );
   }
 }

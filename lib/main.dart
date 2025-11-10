@@ -95,6 +95,9 @@ class _MyAppState extends State<MyApp> {
                   Routes.search => MaterialPageRoute(
                     builder: (_) => const SearchPage(),
                   ),
+                  Routes.results => MaterialPageRoute(
+                    builder: (_) => const ResultsPage(),
+                  ),
                   _ => MaterialPageRoute(
                     builder: (_) => Text(settings.name ?? ''),
                   ),

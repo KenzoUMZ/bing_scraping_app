@@ -7,10 +7,10 @@ class SearchDataSource {
 
   SearchDataSource(this._restClient);
 
-  Future<Response> fetchSearchResults(String query) async {
+  Future<Response> fetchSearchResults(String searchTerm) async {
     final response = await _restClient.dio.post(
       '/scrape',
-      data: {'query': query},
+      data: {'searchTerm': searchTerm},
     );
 
     return response;

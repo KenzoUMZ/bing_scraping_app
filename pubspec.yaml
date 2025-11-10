@@ -32,7 +32,7 @@ dependencies:
   shimmer: ^3.0.0
   google_fonts: ^6.3.2
   flutter_gap: ^1.2.0
-
+  url_launcher: ^6.1.10
 
 
 dev_dependencies:
@@ -45,4 +45,3 @@ flutter:
   assets:
     - lib/i18n/pt_BR.json
     - assets/images/
-    - assets/icons/
