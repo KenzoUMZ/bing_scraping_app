@@ -18,6 +18,7 @@ class _SearchPageState extends State<SearchPage> {
   late final SearchInternetController _controller;
   late final TextEditingController _searchTextController;
   bool isButtonDisabled = true;
+
   @override
   void initState() {
     super.initState();
