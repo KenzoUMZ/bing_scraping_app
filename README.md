@@ -2,6 +2,12 @@
 
 Aplicativo Flutter para realizar buscas na internet e exibir resultados de forma organizada.
 
+<p align="center">
+  <img src="image.png" width="250" />
+  <img src="image-3.png" width="250" />
+  <img src="image-2.png" width="250" />
+</p>
+
 ## Requisitos
 
 - Flutter SDK 3.29.0 ou superior
