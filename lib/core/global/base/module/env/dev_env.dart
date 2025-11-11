@@ -2,5 +2,5 @@ import 'env.dart';
 
 class DevEnv extends Env {
   @override
-  String get baseUrl => 'http://192.168.3.150:8080';
+  String get baseUrl => 'http://YOUR_LOCAL_IP:8080';
 }

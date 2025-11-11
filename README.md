@@ -23,6 +23,27 @@ cd bing_scraping_app
 ```bash
 flutter pub get
 ```
+
+3. Configure o ambiente de desenvolvimento:
+
+Edite o arquivo `lib/core/global/base/module/env/dev_env.dart` e substitua `YOUR_LOCAL_IP` pelo IP da sua máquina na rede local:
+
+```dart
+String get baseUrl => 'http://192.168.X.X:8080';
+```
+
+Para descobrir seu IP local:
+
+**macOS/Linux:**
+```bash
+ifconfig | grep "inet " | grep -v 127.0.0.1
+```
+
+**Windows:**
+```bash
+ipconfig
+```
+
 ## Executando o App
 
 Para executar o app em desenvolvimento (recomendado):
