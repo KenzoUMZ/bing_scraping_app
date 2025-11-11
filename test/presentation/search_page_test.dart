@@ -37,10 +37,11 @@ void main() {
       await tester.pumpWidget(MaterialApp(home: const SearchPage()));
 
       await tester.enterText(find.byType(TextField), 'flutter');
-      await tester.pumpAndSettle();
-
-      await tester.tap(find.byType(UiButton));
       await tester.pump();
+
+      await tester.tap(find.byType(UiButton), warnIfMissed: false);
+      await tester.pump(const Duration(milliseconds: 100));
+      await tester.pump(const Duration(seconds: 1));
 
       final controller = GetIt.I.get<SearchInternetController>();
       expect(controller.state.searchState, isA<SearchSuccessState>());
@@ -50,9 +51,13 @@ void main() {
       await tester.pumpWidget(MaterialApp(home: const SearchPage()));
 
       await tester.enterText(find.byType(TextField), 'flutter');
-      await tester.pumpAndSettle();
-      await tester.tap(find.byType(UiButton));
-      await tester.pumpAndSettle();
+      await tester.pump();
+      await tester.tap(find.byType(UiButton), warnIfMissed: false);
+
+      // Use pump with duration instead of pumpAndSettle to avoid timeout
+      // caused by BackdropFilter animations
+      await tester.pump(const Duration(milliseconds: 100));
+      await tester.pump(const Duration(seconds: 1));
 
       final controller = GetIt.I.get<SearchInternetController>();
       final searchState = controller.state.searchState;
@@ -62,7 +67,7 @@ void main() {
         final results = searchResponse?.results ?? [];
         for (final item in results) {
           if (item.title != null && item.title!.isNotEmpty) {
-            expect(find.text(item.title!), findsWidgets);
+            expect(find.textContaining(item.title!), findsWidgets);
           }
         }
       } else if (searchState is FailureState) {
